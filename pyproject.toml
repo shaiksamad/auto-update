@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "auto-update"
+version = "0.1.0"
+authors = [
+    {name="Shaik Abdus Samad", email="shaiksamad.dev@gmail.com"}
+]
+
+description = "auto-update is a Python package designed to update Python projects installed on client systems that do not have Git installed. It retrieves the latest release from a specified GitHub repository, compares it with the currently installed version, and updates the project accordingly."
+requires-python = ">=3.6"
+dependencies = [
+    'requests',
+    'diff-parser'
+]
+
+license = {file = "LICENSE"}
+readme="README.md"
+keywords = ["update", "auto update scripts", "auto update", "python script update"]
+
+classifiers = [
+  "Intended Audience :: Developers",
+  
+  "License :: OSI Approved :: MIT License",
+
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.6",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/shaiksamad/auto-update.git"
+Repository = "https://github.com/shaiksamad/auto-update.git"
+Issues = "https://github.com/shaiksamad/auto-update/issues"
+
+
