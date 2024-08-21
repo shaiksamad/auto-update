@@ -35,13 +35,15 @@ class Updater:
         # downloading and installing updates
         for d in diff:
             if d.type != 'deleted':
-                print(f"WRITING: .{d.filepath}")
-                with open(f'.{d.filepath}', 'wb') as file:
-                    resp = requests.get(f"{RAW_GITHUB_URL}/{LATEST_VERSION}{d.filepath}")
+                print(f"WRITING: .{d.new_filepath}")
+                with open(f'.{d.old_filepath}', 'wb') as file:
+                    resp = requests.get(f"{RAW_GITHUB_URL}/{LATEST_VERSION}{d.new_filepath}")
                     file.write(resp.content)
-            elif os.path.exists(f".{d.filepath}"):
-                print(f"DELETING: .{d.filepath}")
-                os.remove(f".{d.filepath}")
+                if d.old_filepath != d.new_filepath:
+                    os.rename(d.old_filepath, d.new_filepath)
+            elif os.path.exists(f".{d.old_filepath}"):
+                print(f"DELETING: .{d.old_filepath}")
+                os.remove(f".{d.old_filepath}")
 
     def setup_auto_run():
         # to be implemented
