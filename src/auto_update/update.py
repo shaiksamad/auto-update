@@ -30,7 +30,9 @@ class Updater:
         # comapring diffs
         resp = requests.get(DIFF_URL)
         diff = Diff(resp.content.decode())
-
+        #Mainly to prevent the auto-update code from nuking itself
+            if str(resp) != "<Response [200]>":
+                raise Exception(f"Maybe a network error or most likely the version/github username/repo is not correct, does this link work ?: {GITHUB_REPO_URL}/compare/{VERSION}...{LATEST_VERSION} \n")
 
         # downloading and installing updates
         for d in diff:
@@ -38,9 +40,6 @@ class Updater:
                 print(f"WRITING: .{d.new_filepath}")
                 with open(f'.{d.old_filepath}', 'wb') as file:
                     resp = requests.get(f"{RAW_GITHUB_URL}/{LATEST_VERSION}{d.new_filepath}")
-                    #Mainly to prevent the auto-update code from nuking itself
-                    if str(resp) != "<Response [200]>":
-                        raise Exception("Probably a network error or Damiendier is just bad at coding")
                     file.write(resp.content)
                 if d.old_filepath != d.new_filepath:
                     if os.path.exists(f".{d.old_filepath}"):
